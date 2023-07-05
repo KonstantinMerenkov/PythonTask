@@ -13,7 +13,7 @@ class TriangleExistError(Exception):
 
 class TriangleChecker:
 
-    def __init__(self, a, b, c):
+    def __init__(self, a: int, b: int, c: int) -> None:
         """В инициализатор класса решил добавить проверку на типы данных"""
         if not isinstance(a, (int, float)) or not isinstance(b, (int, float)) or not isinstance(c, (int, float)):
             raise TypeError('Only int or float numbers allowed')
@@ -22,14 +22,14 @@ class TriangleChecker:
             self.b = b
             self.c = c
 
-    def is_exist(self):
+    def is_exist(self) -> str:
         """метод проверки существования треугольника"""
         if self.a > self.c + self.b or self.b > self.a + self.c or self.c > self.b + self.a:
             raise TriangleExistError('No triangle with these sides is possible')
         else:
             return f'The Triangle is possible'
 
-    def is_isosceles(self):
+    def is_isosceles(self) -> str:
         """проверка на равнобедренность, решил включить проверку на существование, ну типа как защита от дурака)"""
         if TriangleChecker.is_exist:
             if (self.a == self.b and self.b != self.c and self.a != self.c) or (
@@ -40,7 +40,7 @@ class TriangleChecker:
         else:
             return f'Your data is invalid, gimme another one'
 
-    def is_fullside(self):
+    def is_fullside(self) -> str:
         """проверка на равносторонность"""
         if TriangleChecker.is_exist:
             if self.a == self.b == self.c:
@@ -76,18 +76,18 @@ print(is_simple(number))
 # Программа должна подсказывать «больше» или «меньше» после каждой попытки.
 class RandomNumApi:
 
-    def __init__(self, name):
+    def __init__(self, name: str) -> None:
         self.name = name
 
     def starting(self):
         print(f'Hello fellow {self.name}')
 
     @staticmethod
-    def num_randomizer():
+    def num_randomizer() -> int:
         return random.randint(0, 1000)
 
     @staticmethod
-    def verify_number(num):
+    def verify_number(num) -> int:
         if not isinstance(num, int) and not 1 <= num <= 100:
             raise ValueError('Wrong type of number, try again')
         else:
