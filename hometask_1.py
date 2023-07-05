@@ -54,7 +54,7 @@ class TriangleChecker:
 # Напишите код, который запрашивает число и сообщает является ли оно простым или составным.
 # Используйте правило для проверки: «Число является простым, если делится нацело только на
 # единицу и на себя». Сделайте ограничение на ввод отрицательных чисел и чисел больше 100 тысяч.
-def is_simple(num):
+def is_simple(num: int) -> str:
     if num < 0 or num > 100000:
         return 'Sorry, dude, your number is invalid'
     else:
@@ -68,9 +68,9 @@ def is_simple(num):
             return f'This number is not simple'
 
 
-num = int(
+number = int(
     input('Put your number right here\n'))  # решил запрашивать целое число, float думаю был бы здесь не в кассу)
-print(is_simple(num))
+print(is_simple(number))
 
 # Программа загадывает число от 0 до 1000. Необходимо угадать число за 10 попыток.
 # Программа должна подсказывать «больше» или «меньше» после каждой попытки.
@@ -84,11 +84,11 @@ class RandomNumApi:
 
     @staticmethod
     def num_randomizer():
-        return random.randint(1, 1000)
+        return random.randint(0, 1000)
 
     @staticmethod
-    def verify_number(number):
-        if not isinstance(number, int) and not 1 <= number <= 100:
+    def verify_number(num):
+        if not isinstance(num, int) and not 1 <= num <= 100:
             raise ValueError('Wrong type of number, try again')
         else:
             return number
