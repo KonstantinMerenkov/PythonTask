@@ -68,9 +68,9 @@ def is_simple(num):
             return f'This number is not simple'
 
 
-# number = int(
-# input('Put your number right here\n'))  # решил запрашивать целое число, float думаю был бы здесь не в кассу)
-# print(is_simple(number))
+num = int(
+    input('Put your number right here\n'))  # решил запрашивать целое число, float думаю был бы здесь не в кассу)
+print(is_simple(num))
 
 # Программа загадывает число от 0 до 1000. Необходимо угадать число за 10 попыток.
 # Программа должна подсказывать «больше» или «меньше» после каждой попытки.
