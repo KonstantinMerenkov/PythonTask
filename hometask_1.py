@@ -6,49 +6,25 @@ import random
 # отрезка-стороны с суммой двух других. Если хотя бы в одном случае отрезок окажется
 # больше суммы двух других, то треугольника с такими сторонами не существует. Отдельно
 # сообщить является ли треугольник разносторонним, равнобедренным или равносторонним.
-class TriangleExistError(Exception):
-    """Создаю кастомное исключение только для проверки существования треугольника"""
-    pass
+def triangle_type(a, b, c):
+    # Проверка существования треугольника
+    if a + b <= c or a + c <= b or b + c <= a:
+        return "Треугольник с такими сторонами не существует"
 
+    # Определение типа треугольника
+    if a != b and b != c and a != c:
+        return "Треугольник разносторонний"
+    elif a == b and b == c:
+        return "Треугольник равносторонний"
+    else:
+        return "Треугольник равнобедренный"
 
-class TriangleChecker:
+# Примеры использования функции
+side1 = int(input('Введите длину стороны 1 - '))
+side2 = int(input('Введите длину стороны 2 - '))
+side3 = int(input('Введите длину стороны 3 - '))
 
-    def __init__(self, a: int, b: int, c: int) -> None:
-        """В инициализатор класса решил добавить проверку на типы данных"""
-        if not isinstance(a, (int, float)) or not isinstance(b, (int, float)) or not isinstance(c, (int, float)):
-            raise TypeError('Only int or float numbers allowed')
-        else:
-            self.a = a
-            self.b = b
-            self.c = c
-
-    def is_exist(self) -> str:
-        """метод проверки существования треугольника"""
-        if self.a > self.c + self.b or self.b > self.a + self.c or self.c > self.b + self.a:
-            raise TriangleExistError('No triangle with these sides is possible')
-        else:
-            return f'The Triangle is possible'
-
-    def is_isosceles(self) -> str:
-        """проверка на равнобедренность, решил включить проверку на существование, ну типа как защита от дурака)"""
-        if TriangleChecker.is_exist:
-            if (self.a == self.b and self.b != self.c and self.a != self.c) or (
-                    self.c == self.b and self.b != self.a and self.c != self.a):
-                return f'Triangle is isosceles'
-            else:
-                return f'Triangle is not isosceles'
-        else:
-            return f'Your data is invalid, gimme another one'
-
-    def is_fullside(self) -> str:
-        """проверка на равносторонность"""
-        if TriangleChecker.is_exist:
-            if self.a == self.b == self.c:
-                return f'Triangle is fullside'
-            else:
-                return f'Triangle is not fullside'
-        else:
-            return f'Your data is invalid, gimme another one'
+print(triangle_type(side1, side2, side3))  # Равнобедренный
 
 
 # Напишите код, который запрашивает число и сообщает является ли оно простым или составным.
@@ -56,20 +32,20 @@ class TriangleChecker:
 # единицу и на себя». Сделайте ограничение на ввод отрицательных чисел и чисел больше 100 тысяч.
 def is_simple(num: int) -> str:
     if num < 0 or num > 100000:
-        return 'Sorry, dude, your number is invalid'
+        return 'Некорректный ввод'
     else:
         count = 0
         for i in range(1, num + 1):
             if num % i == 0:
                 count += 1
         if count <= 2:
-            return f'This number is simple'
+            return f'Простое число'
         else:
-            return f'This number is not simple'
+            return f'Не простое число'
 
 
 number = int(
-    input('Put your number right here\n'))  # решил запрашивать целое число, float думаю был бы здесь не в кассу)
+    input('Введите Ваше число\n'))  
 print(is_simple(number))
 
 # Программа загадывает число от 0 до 1000. Необходимо угадать число за 10 попыток.
@@ -89,29 +65,29 @@ class RandomNumApi:
     @staticmethod
     def verify_number(num) -> int:
         if not isinstance(num, int) and not 1 <= num <= 100:
-            raise ValueError('Wrong type of number, try again')
+            raise ValueError('Неверный тип числа, повторите ввод')
         else:
             return number
 
 
 def guess():
     count = 10
-    nb = RandomNumApi(input('Whats your name\n'))
+    nb = RandomNumApi(input('Enter - запустить генерацию случайного числа\n'))
     nb.starting()
     while count != 0:
-        print('Put your number')
+        print('Введите Ваше число')
         n = int(input())
         if n < nb.num_randomizer():
-            print('Too small')
+            print('Слишком мало')
             count -= 1
         elif n > nb.num_randomizer():
-            print('Too big')
+            print('Слишком велико')
             count -= 1
         elif n == nb.num_randomizer():
-            print('Bulls eye')
+            print('Угадано')
             break
     else:
-        print('Sorry, you ran out of tries')
+        print('Не угадано - закончились попытки')
 
 
 guess()
